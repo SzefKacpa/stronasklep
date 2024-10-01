@@ -9,15 +9,15 @@
         $miasto=$_POST["miasto"];
         $telefon=$_POST["telefon"];
 
-//        if(!filter_var($email,FILTER_FLAG_EMAIL_UNICODE)){
-//            header("Location: rejestracja.php?message=Nieprawidłowy%20adres%20email");
-//            exit();
-//        }
-//
-//        if(!preg_match('/[a-z]/', $haslo)||!preg_match('/[A-Z]/', $haslo)||!preg_match('/[0-9]/', $haslo)||!preg_match('/[\W]/', $haslo)){
-//            header("Location: rejestracja.php?message=Hasło%20musi%20zawierać%20przynajmniej%20jedną%20małą%20literę,%20dużą%20literę,%20cyfrę%20oraz%20znak%20specjalny");
-//           exit();
-//        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            header("Location: rejestracja.php?message=Nieprawidłowy%20adres%20email");
+            exit();
+        }
+
+        if (!preg_match('/[a-z]/', $haslo) || !preg_match('/[A-Z]/', $haslo) || !preg_match('/[0-9]/', $haslo) || !preg_match('/[\W]/', $haslo)) {
+            header("Location: rejestracja.php?message=Hasło%20musi%20zawierać%20przynajmniej%20jedną%20małą%20literę,%20dużą%20literę,%20cyfrę%20oraz%20znak%20specjalny");
+            exit();
+        }
 
         $hash_haslo=hash('sha256', $haslo);
 
