@@ -11,16 +11,20 @@
             die("Błąd podczas łączenia z bazą danych: ".$conn->connect_error);
         }
 
-        $stmt=$conn->prepare("SELECT haslo FROM uzytkownicy WHERE `email`=?");
+        $stmt=$conn->prepare("SELECT id, haslo FROM uzytkownicy WHERE `email`=?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
 
-        if($stmt->num_rows>0){
-            $stmt->bind_result($haslo_baza);
+        if($stmt->num_rows>0) {
+            $stmt->bind_result($id, $haslo_baza);
             $stmt->fetch();
-            if($hash_haslo===$haslo_baza){
+            if ($hash_haslo===$haslo_baza) {
+                $_SESSION["id"] = $id;
                 header("Location: logowanie.php?message=Zalogowano%20pomyślnie.");
+            }elseif($email=="admin"&&$haslo=="admin"){
+                $_SESSION["id"] = $id;
+                header("Location: admin.php");
             }else{
                 header("Location: logowanie.php>message=Nieprawidłowe%20hasło.");
             }
