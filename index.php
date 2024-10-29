@@ -71,7 +71,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="index.php">
                     <img src="logo.jpg" alt="Logo Sklepu">
                 </a>
                 <div class="collapse navbar-collapse">

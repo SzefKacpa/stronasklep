@@ -9,6 +9,11 @@
         $miasto=$_POST["miasto"];
         $telefon=$_POST["telefon"];
 
+        if (empty($email) || empty($haslo) || empty($imie) || empty($nazwisko) || empty($adres) || empty($kod_pocztowy) || empty($miasto) || empty($telefon)) {
+            header("Location: rejestracja.php?message=Proszę%20wypełnić%20wszystkie%20pola");
+            exit();
+        }    
+
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             header("Location: rejestracja.php?message=Nieprawidłowy%20adres%20email");
             exit();
