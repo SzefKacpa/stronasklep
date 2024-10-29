@@ -19,9 +19,11 @@
         if($stmt->num_rows>0) {
             $stmt->bind_result($id, $haslo_baza);
             $stmt->fetch();
-            if ($hash_haslo===$haslo_baza) {
+            if ($hash_haslo === $haslo_baza) {
                 $_SESSION["id"] = $id;
-                header("Location: logowanie.php?message=Zalogowano%20pomyślnie.");
+                $_SESSION["message"] = "Zalogowano pomyślnie.";  
+                header("Location: index.php");
+                exit();
             }elseif($email=="admin"&&$haslo=="admin"){
                 $_SESSION["id"] = $id;
                 header("Location: admin.php");

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sklep -   Strona Główna</title>
+        <title>Sklep - Strona Główna</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <style>
@@ -77,13 +77,13 @@
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="menu_button nav-link btn btn-outline-light" href="index.html">Strona Główna</a>
+                            <a class="menu_button nav-link btn btn-outline-light" href="index.php">Strona Główna</a>
                         </li>
                         <li class="nav-item">
-                            <a class="menu_button nav-link btn btn-outline-primary" href="logowanie.php">Zaloguj się</a>
+                            <a class="menu_button nav-link btn btn-outline-primary" id="do_logowania" href="logowanie.php">Zaloguj się</a>
                         </li>
                         <li class="nav-item">
-                            <a class="menu_button nav-link btn btn-outline-success" href="rejestracja.php">Zarejestruj się</a>
+                            <a class="menu_button nav-link btn btn-outline-success" id="do_rejestracji" href="rejestracja.php">Zarejestruj się</a>
                         </li>
                     </ul>
                 </div>
