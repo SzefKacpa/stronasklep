@@ -11,7 +11,7 @@
     }
 
     $klienci = [];
-    $result = $conn->query("SELECT * FROM uzytkownicy");
+    $result = $conn->query("SELECT id, email FROM uzytkownicy");
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $klienci[] = $row;
@@ -29,6 +29,8 @@
     </head>
     <body>
         <h1>Zarządzaj Klientami</h1>
+
+        <h2><a href="admin.php">Powrót do panelu administracyjnego</a></h2>
 
         <h2>Lista Klientów</h2>
         <table>

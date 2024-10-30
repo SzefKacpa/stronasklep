@@ -46,6 +46,8 @@
 
         <?php if (isset($message)) echo "<p>$message</p>"; ?>
 
+        <h2><a href="admin.php">Powrót do panelu administracyjnego</a></h2>
+
         <h2>Aktualizuj Informacje</h2>
         <form method="POST">
             <select name="tytul" required>

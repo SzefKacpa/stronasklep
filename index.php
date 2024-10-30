@@ -91,6 +91,7 @@
         </nav>
 
         <div class="container">
+            <?php if (isset($_GET['message'])): ?><p align="center" style="font-size: 175%"><?php echo htmlspecialchars($_GET['message']);?></p><?php endif; ?>
         </div>
 
         <footer>

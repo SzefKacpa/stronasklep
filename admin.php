@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if (!isset($_SESSION["id"]) || $_SESSION["id"] != "0") {
+    if (!isset($_SESSION["id"]) || $_SESSION["id"] != 0) {
         header("Location: logowanie.php?message=Proszę się zalogować jako administrator.");
         exit();
     }
@@ -18,10 +18,10 @@
         <link rel="stylesheet" href="styl_1.css">
         <title>Panel Administracyjny</title>
     </head>
-    <body>
+    <body><center>
         <h1>Panel Administracyjny</h1>
         <nav>
-            <ul>
+            <ul style="list-style-type: none">
                 <li><a href="produkty.php">Zarządzaj Produktami</a></li>
                 <li><a href="kategorie.php">Zarządzaj Kategoriami</a></li>
                 <li><a href="klienci.php">Zarządzaj Klientami</a></li>
@@ -30,5 +30,5 @@
                 <li><a href="logout.php">Wyloguj się</a></li>
             </ul>
         </nav>
-    </body>
+    </center></body>
 </html>

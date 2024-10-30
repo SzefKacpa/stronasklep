@@ -31,6 +31,8 @@
     <body>
         <h1>Zarządzaj Zamówieniami</h1>
 
+        <h2><a href="admin.php">Powrót do panelu administracyjnego</a></h2>
+
         <h2>Lista Zamówień</h2>
         <table>
             <tr>
@@ -42,9 +44,10 @@
             <?php foreach ($zamowienia as $zamowienie): ?>
             <tr>
                 <td><?php echo $zamowienie['id']; ?></td>
-                <td><?php echo $zamowienie['klient_id']; ?></td>
-                <td><?php echo $zamowienie['data_zamowienia']; ?></td>
-                <td><?php echo $zamowienie['calkowita_kwota']; ?></td>
+                <td><?php echo $zamowienie['id_klient']; ?></td>
+                <td><?php echo $zamowienie['id_produkt']; ?></td>
+                <td><?php echo $zamowienie['ilosc']; ?></td>
+                <td><?php echo $zamowienie['data']; ?></td>
             </tr>
             <?php endforeach; ?>
         </table>

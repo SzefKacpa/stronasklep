@@ -15,7 +15,7 @@
         $cena = $_POST["cena"];
         $kategoria = $_POST["kategoria"];
 
-        $stmt = $conn->prepare("INSERT INTO produkty (nazwa, cena, kategoria) VALUES (?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO produkty (nazwa, cena, id_kategoria) VALUES (?, ?, ?)");
         $stmt->bind_param("sds", $nazwa, $cena, $kategoria);
         if ($stmt->execute()) {
             $message = "Produkt dodany pomyślnie.";
@@ -44,10 +44,13 @@
     </head>
     <body>
         <h1>Zarządzaj Produktami</h1>
+
+        <h2><a href="admin.php">Powrót do panelu administracyjnego</a></h2>
+
         <form method="POST">
             <input type="text" name="nazwa" placeholder="Nazwa produktu" required>
             <input type="number" step="0.01" name="cena" placeholder="Cena produktu" required>
-            <input type="text" name="kategoria" placeholder="Kategoria" required>
+            <input type="number" name="kategoria" placeholder="Kategoria" required>
             <button type="submit" name="add_product">Dodaj Produkt</button>
         </form>
 
@@ -66,7 +69,7 @@
                     <td><?php echo $produkt['id']; ?></td>
                     <td><?php echo $produkt['nazwa']; ?></td>
                     <td><?php echo $produkt['cena']; ?></td>
-                    <td><?php echo $produkt['kategoria']; ?></td>
+                    <td><?php echo $produkt['id_kategoria']; ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>

@@ -49,6 +49,8 @@
 
         <?php if (isset($message)) echo "<p>$message</p>"; ?>
 
+        <h2><a href="admin.php">Powrót do panelu administracyjnego</a></h2>
+
         <h2>Lista Kategorii</h2>
         <table>
             <tr>
