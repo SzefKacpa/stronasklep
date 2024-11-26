@@ -10,13 +10,16 @@ if ($conn->connect_error) {
     die("Błąd podczas łączenia z bazą danych: " . $conn->connect_error);
 }
 
+$message = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_product'])) {
     $nazwa = $_POST["nazwa"];
     $cena = $_POST["cena"];
     $kategoria = $_POST["kategoria"];
+    $opis = $_POST["opis"];
 
-    $stmt = $conn->prepare("INSERT INTO produkty (nazwa, cena, id_kategoria) VALUES (?, ?, ?)");
-    $stmt->bind_param("sds", $nazwa, $cena, $kategoria);
+    $stmt = $conn->prepare("INSERT INTO produkty (nazwa, cena, id_kategoria, opis) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("sdss", $nazwa, $cena, $kategoria, $opis);
     if ($stmt->execute()) {
         $message = "Produkt dodany pomyślnie.";
     } else {
@@ -42,9 +45,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['edit_product'])) {
     $nazwa = $_POST["nazwa"];
     $cena = $_POST["cena"];
     $kategoria = $_POST["kategoria"];
+    $opis = $_POST["opis"];
 
-    $stmt = $conn->prepare("UPDATE produkty SET nazwa = ?, cena = ?, id_kategoria = ? WHERE id = ?");
-    $stmt->bind_param("sdsi", $nazwa, $cena, $kategoria, $id);
+    $stmt = $conn->prepare("UPDATE produkty SET nazwa = ?, cena = ?, id_kategoria = ?, opis = ? WHERE id = ?");
+    $stmt->bind_param("sdssi", $nazwa, $cena, $kategoria, $opis, $id);
     if ($stmt->execute()) {
         $message = "Produkt zaktualizowany pomyślnie.";
     } else {
@@ -62,6 +66,7 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -103,10 +108,13 @@ $conn->close();
         <div class="mb-3">
             <input type="number" name="kategoria" class="form-control" placeholder="ID Kategorii" required>
         </div>
+        <div class="mb-3">
+            <textarea name="opis" class="form-control" placeholder="Opis produktu"></textarea>
+        </div>
         <button type="submit" name="add_product" class="btn btn-primary w-100">Dodaj Produkt</button>
     </form>
 
-    <?php if (isset($message)) echo "<p class='text-center text-info'>$message</p>"; ?>
+    <?php if (!empty($message)) echo "<p class='text-center text-info'>$message</p>"; ?>
 
     <h2>Lista Produktów</h2>
     <table class="table table-dark table-striped">
@@ -116,6 +124,7 @@ $conn->close();
             <th>Nazwa</th>
             <th>Cena</th>
             <th>Kategoria</th>
+            <th>Opis</th>
             <th>Akcje</th>
         </tr>
         </thead>
@@ -126,6 +135,7 @@ $conn->close();
                 <td><?php echo $produkt['nazwa']; ?></td>
                 <td><?php echo $produkt['cena']; ?></td>
                 <td><?php echo $produkt['id_kategoria']; ?></td>
+                <td><?php echo $produkt['opis']; ?></td>
                 <td>
                     <a href="?delete_id=<?php echo $produkt['id']; ?>" class="btn btn-danger btn-sm">Usuń</a>
                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $produkt['id']; ?>">Edytuj</button>
@@ -148,6 +158,9 @@ $conn->close();
                                         </div>
                                         <div class="mb-3">
                                             <input type="number" name="kategoria" class="form-control" value="<?php echo $produkt['id_kategoria']; ?>" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <textarea name="opis" class="form-control" required><?php echo $produkt['opis']; ?></textarea>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
