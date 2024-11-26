@@ -1,0 +1,27 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+.navbar {
+    background-color: #1f1f1f;
+}
+.navbar-nav .nav-link {
+    color: #ffffff;
+    margin-right: 15px;
+    transition: color 0.3s;
+}
+.navbar-nav .nav-link:hover {
+    color: #00bcd4;
+}
+.navbar-brand {
+    color: #ffffff;
+    font-weight: bold;
+}
+.navbar-brand:hover {
+    color: #00bcd4;
+}
+h1 {
+    margin-top: 20px;
+    text-align: center;
+}
