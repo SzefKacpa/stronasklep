@@ -37,9 +37,9 @@
 <footer>
     <div>© 2024 Sklep</div>
     <div>
-        <a href="polityka_prywatnosci.html">Polityka prywatności</a>
+        <a href="o_nas.php">O nas</a>
         |
-        <a href="regulamin.html">Regulamin</a></div>
+        <a href="regulamin.php">Regulamin</a></div>
     <p>Kontakt: <a href="mailto:kontakt@sklep.pl">kontakt@sklep.pl</a> | Telefon: 123-456-789</p>
     <div class="social-icons">
         <div><span>link_facebook</span> <i class="bi bi-facebook"></i></div>
