@@ -22,7 +22,7 @@
                 <img class="logo" src="logo.jpg" alt="Logo Sklepu">
             </a>
         </div>
-        <div class="">
+
             <div class="logowanie d-flex justify-content-center align-items-center full-height content">
                 <form action="logowanie-PHP.php" method="post">
                     <h1>Logowanie</h1>
@@ -65,7 +65,6 @@
                     <div><span>link_tiktok</span> <i class="bi bi-tiktok"></i></div>
                 </div>
             </footer>
-        </div>
         <script>
             document.getElementById('do_rejestracji').onclick = function(){
                 window.location.href = 'rejestracja.php';
