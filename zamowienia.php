@@ -15,8 +15,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id_klient = $_POST['id_klient'];
         $id_produkt = $_POST['id_produkt'];
         $ilosc = $_POST['ilosc'];
+        $status  = $_POST['status'];
         $data = $_POST['data'];
-        $conn->query("INSERT INTO zamowienia (id_klient, id_produkt, ilosc, data) VALUES ('$id_klient', '$id_produkt', '$ilosc', '$data')");
+        $conn->query("INSERT INTO zamowienia (id_klient, id_produkt, ilosc, status, data) VALUES ('$id_klient', '$id_produkt', '$ilosc', '$status', '$data')");
     } elseif (isset($_POST['usun'])) {
         $id = $_POST['id'];
         $conn->query("DELETE FROM zamowienia WHERE id = '$id'");
@@ -25,8 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id_klient = $_POST['id_klient'];
         $id_produkt = $_POST['id_produkt'];
         $ilosc = $_POST['ilosc'];
+        $status  = $_POST['status'];
         $data = $_POST['data'];
-        $conn->query("UPDATE zamowienia SET id_klient = '$id_klient', id_produkt = '$id_produkt', ilosc = '$ilosc', data = '$data' WHERE id = '$id'");
+        $conn->query("UPDATE zamowienia SET id_klient = '$id_klient', id_produkt = '$id_produkt', ilosc = '$ilosc', status='$status' data = '$data' WHERE id = '$id'");
     }
 }
 
@@ -84,6 +86,10 @@ $conn->close();
             <input type="number" id="ilosc" name="ilosc" class="form-control" required>
         </div>
         <div class="mb-3">
+            <label for="id_produkt" class="form-label">Status:</label>
+            <input type="text" id="status" name="status" class="form-control" required>
+        </div>
+        <div class="mb-3">
             <label for="data" class="form-label">Data:</label>
             <input type="date" id="data" name="data" class="form-control" required>
         </div>
@@ -98,6 +104,7 @@ $conn->close();
             <th>Klient</th>
             <th>Produkt</th>
             <th>Ilość</th>
+            <th>Status</th>
             <th>Data</th>
             <th>Akcje</th>
         </tr>
@@ -109,6 +116,7 @@ $conn->close();
                 <td><?php echo $zamowienie['id_klient']; ?></td>
                 <td><?php echo $zamowienie['id_produkt']; ?></td>
                 <td><?php echo $zamowienie['ilosc']; ?></td>
+                <td><?php echo $zamowienie['status']; ?></td>
                 <td><?php echo $zamowienie['data']; ?></td>
                 <td>
                     <form method="post" style="display:inline;">
@@ -120,6 +128,7 @@ $conn->close();
                         <input type="text" name="id_klient" value="<?php echo $zamowienie['id_klient']; ?>" required>
                         <input type="text" name="id_produkt" value="<?php echo $zamowienie['id_produkt']; ?>" required>
                         <input type="number" name="ilosc" value="<?php echo $zamowienie['ilosc']; ?>" required>
+                        <input type="text" name="status" value="<?php echo $zamowienie['status']; ?>" required>
                         <input type="date" name="data" value="<?php echo $zamowienie['data']; ?>" required>
                         <button type="submit" name="edytuj" class="btn btn-warning btn-sm">Edytuj</button>
                     </form>

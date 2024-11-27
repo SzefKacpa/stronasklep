@@ -207,7 +207,7 @@
             <div class="main-content">
                 <div class="image-section">
                     <h1><?php echo htmlspecialchars($produkt['nazwa']); ?></h1> 
-                    <img src="noimage.jpg" alt="<?php echo htmlspecialchars($produkt['nazwa']); ?>">
+                    <img src="zdjecia_prod/<?php echo htmlspecialchars($produkt['id']);?>.jpg" alt="<?php echo htmlspecialchars($produkt['nazwa']); ?>">
                 </div>
 
                 <div class="product-info">

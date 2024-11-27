@@ -29,7 +29,7 @@
             if($hash_haslo===$haslo_baza){
                 $_SESSION["id"] = $id;
                 $_SESSION["message"] = "Zalogowano pomyślnie.";
-                header("Location: index.php?message=Witaj!%20PANEL%20KLIENTA%20W%20BUDOWIE%20!!!");
+                header("Location: index.php?message=Witaj!");
                 exit();
             }else{
                 header("Location: logowanie.php?message=Nieprawidłowe%20hasło.");

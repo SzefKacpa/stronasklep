@@ -96,7 +96,7 @@
                         <a href="produkt_strona.php?id_produktu=' . $id . '" class="product-icon">
                             <i class="bi bi-search"></i>
                         </a>
-                        <img src="noimage.jpg" alt="Obrazek produktu" class="product-image">
+                        <img src="zdjecia_prod/'.$id.'.jpg" alt="Obrazek produktu" class="product-image">
                         <div class="product-info">
                             <div class="product-title">' . $nazwa . '</div>
                             <div class="product-price">' . $cena . ' PLN</div>
