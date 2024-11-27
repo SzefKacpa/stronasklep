@@ -1,12 +1,26 @@
+<?php
+    session_start();
+    $conn = new mysqli("localhost", "root", "", "stronabaza");
+    if ($conn->connect_error) {
+        die("Błąd podczas łączenia z bazą danych: " . $conn->connect_error);
+    }
+
+    $result = $conn->query('SELECT tresc FROM informacje WHERE id=1');
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sklep - Strona Główna</title>
+  <title>Sklep - O nas</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <link href="styl_1.css" rel="stylesheet">
+    <style>
+        .container {
+            font-size: 30px;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark">
@@ -31,17 +45,27 @@
 </nav>
 
 <div class="container">
-  <?php
+    <?php
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        echo htmlspecialchars($row['tresc']);
+    } else {
+        echo "Brak wyników do wyświetlenia.";
+    }
 
-  ?>
+    $result->free_result();
+
+    $conn->close();
+    ?>
 </div>
+
 
 <footer>
   <div>© 2024 Sklep</div>
   <div>
-    <a href="o_nas.html">O nas</a>
+    <a href="o_nas.php">O nas</a>
     |
-    <a href="regulamin.html">Regulamin</a></div>
+    <a href="regulamin.php">Regulamin</a></div>
   <p>Kontakt: <a href="mailto:kontakt@sklep.pl">kontakt@sklep.pl</a> | Telefon: 123-456-789</p>
   <div class="social-icons">
     <div><span>link_facebook</span> <i class="bi bi-facebook"></i></div>
