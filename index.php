@@ -22,20 +22,26 @@
                 <li class="nav-item">
                     <a class="menu_button nav-link btn btn-outline-light" href="index.php">Strona Główna</a>
                 </li>
+                <li class="nav-item">
+                <a class="menu_button nav-link btn btn-outline-primary" href="koszyk.php">
+                    <i class="bi bi-cart"></i> Koszyk
+                </a>
+                </li>
                 <?php
                 if(!isset($_SESSION["id"])) {
-                    echo "<li class='nav-item'> <a class='menu_button nav-link btn btn-outline-primary' id='do_logowania' href='logowanie.php'>Zaloguj się</a> </li>";
-                    echo "<li class='nav-item'> <a class='menu_button nav-link btn btn-outline-primary' id='do_rejestracji' href='rejestracja.php'>Zarejestruj się</a> </li>";
-                }elseif($_SESSION["id"]!=0){
-                    echo "<li class='nav-item'> <a class='menu_button nav-link btn btn-outline-primary' id='do_panelu_klienta' href='panel_klienta.php'>Twoje konto</a> </li>";
-                }elseif($_SESSION["id"]=0){
-                    echo "<li class='nav-item'> <a class='menu_button nav-link btn btn-outline-primary' id='do_panelu_administratora' href='admin.php'>Panel administratora</a> </li>";
+                    echo "<li class='nav-item'> <a class='menu_button nav-link btn btn-outline-primary' href='logowanie.php'>Zaloguj się</a> </li>";
+                    echo "<li class='nav-item'> <a class='menu_button nav-link btn btn-outline-primary' href='rejestracja.php'>Zarejestruj się</a> </li>";
+                } elseif ($_SESSION["id"] != 0) {
+                    echo "<li class='nav-item'> <a class='menu_button nav-link btn btn-outline-primary' href='panel_klienta.php'>Twoje konto</a> </li>";
+                } elseif ($_SESSION["id"] == 0) {
+                    echo "<li class='nav-item'> <a class='menu_button nav-link btn btn-outline-primary' href='admin.php'>Panel administratora</a> </li>";
                 }
                 ?>
             </ul>
         </div>
     </div>
 </nav>
+
 <form method="GET" action="index.php" class="mb-4">
         <div class="d-flex justify-content-between">
             <input type="text" name="search" id="searchInput" class="form-control w-75" placeholder="Wpisz nazwę produktu...">

@@ -212,7 +212,10 @@
 
                 <div class="product-info">
                     <h2>Cena: <?php echo number_format($produkt['cena'], 2); ?> zł</h2>
-                    <button class="btn btn-success">Dodaj do koszyka</button>
+                    <form method="POST" action="dodaj_do_koszyka.php">
+                        <input type="hidden" name="id_produktu" value="<?php echo $produkt['id']; ?>">
+                        <button type="submit" class="btn btn-primary">Dodaj do koszyka</button>
+                    </form>
                     <p><?php echo nl2br(htmlspecialchars($produkt['opis'])); ?></p>
                     
                     <a href="index.php" class="btn btn-primary">Powrót do listy produktów</a>
