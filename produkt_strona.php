@@ -5,14 +5,21 @@
         die("Błąd podczas łączenia z bazą danych: " . $conn->connect_error);
     }
 
-    $id=isset($_GET["id_produktu"])?(int)$_GET["id_produktu"]:0;
+    $id = isset($_GET["id_produktu"]) ? (int)$_GET["id_produktu"] : 0;
 
-    $result = $conn->prepare('SELECT * FROM produkty WHERE id=?');
-    $result->bind_param('i',$id);
+    $result = $conn->prepare('SELECT * FROM produkty WHERE id = ?');
+    $result->bind_param('i', $id);
     $result->execute();
-    $q_result=$result->get_result();
-    $produkt=$q_result->fetch_assoc();
+    $q_result = $result->get_result();
+
+    if ($q_result->num_rows > 0) {
+        $produkt = $q_result->fetch_assoc();
+    } else {
+        header("Location: index.php?message=Produkt%20nie%20znaleziony");
+        exit();
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="pl">
     <head>
@@ -22,17 +29,19 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <link href="styl_1.css" rel="stylesheet">
         <style>
+            body {
+                background-color: #222; 
+                color: #f5f5f5; 
+                font-family: Arial, sans-serif;
+            }
+
             .container {
                 width: 80%;
                 margin: auto;
-                background: #fff;
+                background: #333; 
                 padding: 20px;
-                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            }
-
-            header {
-                text-align: center;
-                margin-bottom: 20px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+                border-radius: 8px; 
             }
 
             .image-section {
@@ -44,18 +53,129 @@
             .image-section img {
                 width: 100%;
                 border-radius: 5px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             }
 
             .product-info {
                 float: left;
                 width: 60%;
+                color: #f5f5f5; 
             }
 
             .product-info h2 {
-                color: #e60000;
+                color: #28a745; 
+                font-size: 24px;
+            }
+
+            .product-info p {
+                padding: 15px;
+                border: 1px solid #444; 
+                border-radius: 5px; 
+                background-color: #444; /
+                color: #f5f5f5; 
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+                margin: 20px;
+            }
+
+            .btn-success {
+                background-color: #28a745;
+                border-color: #28a745;
+                color: white; 
+            }
+
+            .btn-success:hover {
+                background-color: #218838;
+                border-color: #1e7e34;
+            }
+
+            .product-title {
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .product-price {
+                font-size: 16px;
+                color: #28a745; 
+            }
+
+            footer a {
+                color: #f5f5f5;
+                text-decoration: none;
+                margin: 0 10px;
+            }
+
+            footer a:hover {
+                color: #8b8b8b; 
+            }
+
+            footer {
+                text-align: center;
+                padding: 10px;
+                background-color: #222; 
+                margin-top: 30px;
+                border-top: 1px solid #444;
+            }
+
+            .social-icons i {
+                font-size: 24px;
+                color: #ccc; 
+                margin: 0 10px;
+            }
+
+            .social-icons i:hover {
+                color: #8b8b8b; 
+            }
+
+            .navbar {
+                background-color: #222; 
+                border-bottom: 1px solid #444; 
+                margin-bottom: 20px;
+            }
+
+            .navbar-brand img {
+                max-height: 80px; 
+            }
+
+            .navbar-nav .nav-item .nav-link {
+                color: #f5f5f5; 
+                font-weight: bold;
+                padding: 10px 15px;
+            }
+
+            .navbar-nav .nav-item .nav-link:hover {
+                color: #8b8b8b; 
+                background-color: #444; 
+                border-radius: 5px; 
+            }
+
+            .navbar-toggler {
+                border-color: #444; 
+            }
+
+            .navbar-toggler-icon {
+                background-color: #f5f5f5; 
+            }
+
+            .menu_button {
+                font-size: 16px;
+            }
+
+            .navbar-light .navbar-nav .nav-link {
+                color: #f5f5f5;
+            }
+
+            .navbar-light .navbar-nav .nav-link:hover {
+                color: #8b8b8b; 
+            }
+
+            .image-section h1 {
+                text-align: center;
+                font-size: 2em;
+                color: #f5f5f5; 
+                margin-bottom: 15px;
             }
         </style>
-        <title><?php echo $_GET['nazwa_produktu']; ?></title>
+        <title><?php echo htmlspecialchars($produkt['nazwa']); ?></title>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark">
@@ -80,30 +200,29 @@
         </nav>
 
         <div class="container">
-            <header>
-                <h1><?php echo htmlspecialchars($produkt['nazwa']); ?></h1>
-            </header>
-
             <div class="main-content">
                 <div class="image-section">
-                    <img src="<?php echo htmlspecialchars($produkt['id']); ?>.jpg" alt="<?php echo htmlspecialchars($produkt['nazwa']); ?>">
+                    <h1><?php echo htmlspecialchars($produkt['nazwa']); ?></h1> 
+                    <img src="noimage.jpg" alt="<?php echo htmlspecialchars($produkt['nazwa']); ?>">
                 </div>
 
                 <div class="product-info">
                     <h2>Cena: <?php echo number_format($produkt['cena'], 2); ?> zł</h2>
-                    <button>Dodaj do koszyka</button>
+                    <button class="btn btn-success">Dodaj do koszyka</button>
                     <p><?php echo nl2br(htmlspecialchars($produkt['opis'])); ?></p>
+                    
+                    <a href="index.php" class="btn btn-primary">Powrót do listy produktów</a>
                 </div>
             </div>
         </div>
-        <a href="index.php" class="btn btn-primary">Powrót do listy produktów</a>
+
 
         <footer>
             <div>© 2024 Sklep</div>
             <div>
-                <a href="polityka_prywatnosci.html">Polityka prywatności</a>
+                <a href="o_nas.php">O nas</a>
                 |
-                <a href="regulamin.html">Regulamin</a></div>
+                <a href="regulamin.php">Regulamin</a></div>
             <p>Kontakt: <a href="mailto:kontakt@sklep.pl">kontakt@sklep.pl</a> | Telefon: 123-456-789</p>
             <div class="social-icons">
                 <div><span>link_facebook</span> <i class="bi bi-facebook"></i></div>

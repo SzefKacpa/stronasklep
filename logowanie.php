@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Logowanie - TRNShop</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <link rel="stylesheet" href="styl_1.css">
         <style>
             .logo{
@@ -55,9 +56,9 @@
             <footer>
                 <div>© 2024 Sklep</div>
                 <div>
-                    <a href="polityka_prywatnosci.html">Polityka prywatności</a>
+                    <a href="o_nas.html">O nas</a>
                     |
-                    <a href="regulamin.html">Regulamin</a></div>
+                    <a href="regulamin.php">Regulamin</a></div>
                 <p>Kontakt: <a href="mailto:kontakt@sklep.pl">kontakt@sklep.pl</a> | Telefon: 123-456-789</p>
                 <div class="social-icons">
                     <div><span>link_facebook</span> <i class="bi bi-facebook"></i></div>

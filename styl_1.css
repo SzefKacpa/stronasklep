@@ -8,32 +8,59 @@ body {
 }
 
 .navbar {
-    background-color: black;
+    background-color: #222; 
     height: 120px;
 }
 
 .navbar a {
     color: white;
+    font-weight: bold;
+    padding: 10px 15px;
 }
 
 .navbar-brand img {
     height: 80px;
 }
 
+.navbar-nav .nav-item .nav-link {
+    color: #f5f5f5; 
+    padding: 10px 15px;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #8b8b8b; 
+    background-color: #444; 
+    border-radius: 5px; 
+}
+
+.navbar-toggler {
+    border-color: #444; 
+}
+
+.navbar-toggler-icon {
+    background-color: #f5f5f5; 
+}
+
 .container {
+
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px;
+    padding-top: 0px;  
+    padding-right: 50px; 
+    padding-bottom: 50px;
+    padding-left: 50px;
+    background-color: #fff;
 }
 
 footer {
-    background-color: #000;
+    background-color: #222; 
     color: white;
     padding: 20px;
     display: flex;
     justify-content: space-between;
+    border-top: 1px solid #444; 
 }
 
 footer .social-icons {
@@ -49,18 +76,30 @@ footer .social-icons i {
 }
 
 footer .social-icons i:hover {
-    color: #888;
-}
-.menu_button{
-    margin: 5px;
-}
-.menu_button:hover{
-    color:black;
+    color: #8b8b8b; 
 }
 
-.baner{
+footer a {
+    color: #f5f5f5;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    color: #8b8b8b; 
+}
+
+.menu_button {
+    margin: 5px;
+}
+
+.menu_button:hover {
+    color: black; 
+}
+
+.baner {
     text-align: center;
-    border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid lightgray; 
 }
 
 .logo {
@@ -82,12 +121,12 @@ footer .social-icons i:hover {
     margin: 0; 
 }
 
-.logowanie{
+.logowanie {
     margin: 30px;
     padding: 15px;
 }
 
-form{
+form {
     margin: 15px auto;
     width: 500px;
     padding: 20px;
@@ -96,3 +135,64 @@ form{
     background-color: #f8f9fa;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
+.product-card {
+    position: relative;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 400px; 
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.product-image {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.product-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.product-title {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.product-price {
+    color: #28a745;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.product-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.6); 
+    border-radius: 50%;
+    padding: 10px; 
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.product-icon i {
+    font-size: 1.5em; 
+    color: white; 
+}
+
+.product-icon:hover {
+    background-color: #343a40; 
+}
+
+.product-icon:hover i {
+    color: #ffffff; 
+}
+
