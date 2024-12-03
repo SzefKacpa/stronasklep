@@ -70,7 +70,7 @@ $result = $conn->query('SELECT tresc FROM informacje WHERE id=2');
         <a href="o_nas.php">O nas</a>
         |
         <a href="regulamin.php">Regulamin</a></div>
-    <p>Kontakt: <a href="mailto:kontakt@sklep.pl">kontakt@sklep.pl</a> | Telefon: 123-456-789</p>
+    <p>Kontakt: <a href="mailto:trnshop.kontakt@gmail.com">trnshop.kontakt@gmail.com</a> | Telefon: 123-456-789</p>
     <div class="social-icons">
         <div><span>link_facebook</span> <i class="bi bi-facebook"></i></div>
         <div><span>link_instagram</span> <i class="bi bi-instagram"></i></div>
