@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-$conn = new mysqli("localhost", "root", "", "stronabaza");
+$conn = new mysqli("127.0.0.1", "szefkacpaSQL", "x2J2_6iX$9_#T5", "szefkacpa3");
 
 if ($conn->connect_error) {
     die("BÅ‚Ä…d poÅ‚Ä…czenia z bazÄ… danych: " . $conn->connect_error);
@@ -13,9 +13,9 @@ $id_klienta = isset($_SESSION['id']) ? $_SESSION['id'] : 1;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'phpmailer/src/Exception.php';
-require 'phpmailer/src/PHPMailer.php';
-require 'phpmailer/src/SMTP.php';
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $imie = $_POST['imie'];
@@ -77,15 +77,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->addAddress($email);
 
             $mail->isHTML(true);
-            $mail->Subject = 'Potwierdzenie zamÃ³wienia';
+            $mail->Subject = 'Potwierdzenie zamówienia';
             $mail->Body = "
-                <h3>Twoje zamÃ³wienie zostaÅ‚o zÅ‚oÅ¼one!</h3>
-                <p>Dane dostawy:</p>
-                <p>ImiÄ™ i nazwisko: $imie $nazwisko</p>
-                <p>Adres: $adres</p>
-                <p>Miasto: $miasto</p>
-                <p>Kod pocztowy: $kod_pocztowy</p>
-                <p>Numer telefonu: $telefon</p>
+                <h3>Twoje zamówienie zosta³o z³o¿one!</h3>
+                <h4>Dane dostawy:</h4>
+                <p>Imiê i nazwisko: $imie $nazwisko<br>
+                Adres: $adres<br>
+                Miasto: $miasto<br>
+                Kod pocztowy: $kod_pocztowy<br>
+                Numer telefonu: $telefon</p>
+				<p>Aby op³aciæ zamówienie, wyœlij przelew na numer konta 12 3456 7890 1111 2222 3333 4444<br>
+				nazwa konta 'TRNshop' z tytu³em 'numerZamówienia_imie_nazwisko'</p>
             ";
 
             $mail->send();

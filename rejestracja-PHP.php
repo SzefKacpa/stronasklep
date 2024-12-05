@@ -26,7 +26,7 @@
 
         $hash_haslo=hash('sha256', $haslo);
 
-        $conn=mysqli_connect("localhost","root","","stronabaza");
+        $conn=mysqli_connect("127.0.0.1","szefkacpaSQL","x2J2_6iX$9_#T5","szefkacpa3");
         if($conn->connect_error){
             die("Błąd połączenia z bazą danych: ".$conn->connect_error);
         }

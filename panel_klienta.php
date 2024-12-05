@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$mysqli = new mysqli("localhost", "root", "", "stronabaza");
+$mysqli = new mysqli("127.0.0.1", "szefkacpaSQL", "x2J2_6iX$9_#T5", "szefkacpa3");
 
 if ($mysqli->connect_error) {
     die("Błąd połączenia: " . $mysqli->connect_error);

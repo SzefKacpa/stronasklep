@@ -5,7 +5,7 @@ if (!isset($_SESSION["id"]) || $_SESSION["id"] != "0") {
     exit();
 }
 
-$conn = new mysqli("localhost", "root", "", "stronabaza");
+$conn = new mysqli("127.0.0.1", "szefkacpaSQL", "x2J2_6iX$9_#T5", "szefkacpa3");
 if ($conn->connect_error) {
     die("Błąd podczas łączenia z bazą danych: " . $conn->connect_error);
 }
