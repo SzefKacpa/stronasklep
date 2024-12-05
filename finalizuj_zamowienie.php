@@ -6,20 +6,24 @@ if ($conn->connect_error) {
     die("Błąd połączenia z bazą danych: " . $conn->connect_error);
 }
 
-$id_klienta = isset($_SESSION['id']) ? $_SESSION['id'] : 1; 
+$id_klienta = isset($_SESSION['id']) ? $_SESSION['id'] : 1;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ilosc'])) {
     $ilosci = $_POST['ilosc'];
     $produkty = [];
-    foreach ($ilosci as $id_produktu => $ilosc) {
+    foreach ($ilosci as $id_koszyka => $ilosc) {
         if ($ilosc > 0) {
-            $sql = "SELECT p.nazwa, p.cena FROM produkty p WHERE p.id = ?";
+            $sql = "SELECT k.id AS id_koszyka, p.nazwa, p.cena 
+                    FROM koszyk k 
+                    JOIN produkty p ON k.id_produktu = p.id 
+                    WHERE k.id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("i", $id_produktu);
+            $stmt->bind_param("i", $id_koszyka);
             $stmt->execute();
             $result = $stmt->get_result();
             if ($row = $result->fetch_assoc()) {
                 $produkty[] = [
+                    'id_koszyka' => $row['id_koszyka'],
                     'nazwa' => $row['nazwa'],
                     'cena' => $row['cena'],
                     'ilosc' => $ilosc
@@ -32,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ilosc'])) {
     exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -47,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ilosc'])) {
     <table class="table table-bordered">
         <thead>
             <tr>
+                <th>ID Koszyka</th>
                 <th>Produkt</th>
                 <th>Ilość</th>
                 <th>Cena za sztukę</th>
@@ -59,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ilosc'])) {
             foreach ($produkty as $produkt) {
                 $suma = $produkt['cena'] * $produkt['ilosc'];
                 echo "<tr>";
+                echo "<td>" . htmlspecialchars($produkt['id_koszyka']) . "</td>";
                 echo "<td>" . htmlspecialchars($produkt['nazwa']) . "</td>";
                 echo "<td>" . htmlspecialchars($produkt['ilosc']) . "</td>";
                 echo "<td>" . number_format($produkt['cena'], 2) . " zł</td>";
@@ -72,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ilosc'])) {
     <h3 class="text-end">Całkowita kwota: <?php echo number_format($total, 2); ?> zł</h3>
 
     <a href="koszyk.php" class="btn btn-secondary mt-3">Powrót do koszyka</a>
-    <a href="index.php" class="btn btn-primary mt-3">Zakończ zakupy</a>
+    <a href="zloz_zamowienie.php" class="btn btn-primary mt-3">Zakończ zakupy</a>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
