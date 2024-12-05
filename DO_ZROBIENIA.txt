@@ -1,0 +1,8 @@
+K- zdjęcia zapisywane w bazie zamiast lokalnie
+M- ulepszyć wyświetlanie zamówień w panelu klienta (cena, data zamówienia)
+K- naprawić panel administracyjny (w zamówieniach: data, adres zamówienia, telefon, mail)(w informacjach: czcionka)
+K- NAVBAR!!!
+K- przy dodawaniu produktu - lista kategorii
+M- opis produktu się nie wyświetla
+M- poprawne wyśiwtelanie tekstu
+M- wyświetlanie obrazów z bazy zamiast z plików

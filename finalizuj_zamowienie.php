@@ -10,6 +10,14 @@ $id_klienta = isset($_SESSION['id']) ? $_SESSION['id'] : 1;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ilosc'])) {
     $ilosci = $_POST['ilosc'];
+    foreach ($ilosci as $id_koszyka => $ilosc) {
+        if ($ilosc > 0) {
+            $update_sql = "UPDATE koszyk SET ilosc = ? WHERE id = ? AND id_klient = ?";
+            $update_stmt = $conn->prepare($update_sql);
+            $update_stmt->bind_param("iii", $ilosc, $id_koszyka, $id_klienta);
+            $update_stmt->execute();
+        }
+    }
     $produkty = [];
     foreach ($ilosci as $id_koszyka => $ilosc) {
         if ($ilosc > 0) {
@@ -43,46 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ilosc'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Podsumowanie Zamówienia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px; /* Odstępy między elementami */
-            margin: 20px auto;
-            width: 50%; /* Szerokość formularza */
-        }
-
-        label {
-            font-size: 16px;
-            text-align: left;
-            width: 100%;
-        }
-
-        input {
-            width: 100%;
-            padding: 8px;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        h3 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 768px) {
-            form {
-                width: 90%; /* Dostosowanie dla mniejszych ekranów */
-            }
-        }
-    </style>
 </head>
 <body>
 <div class="container mt-5">
@@ -114,28 +82,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ilosc'])) {
             ?>
         </tbody>
     </table>
-    <form method="POST" action="zloz_zamowienie.php">
-        <h3>Podaj dane do wysyłki:</h3>
-        <label for="imie">Imię:</label>
-        <input type="text" name="imie" id="imie" required>
-        <label for="nazwisko">Nazwisko:</label>
-        <input type="text" name="nazwisko" id="nazwisko" required>
-        <label for="adres">Adres:</label>
-        <input type="text" name="adres" id="adres" required>
-        <label for="miasto">Miasto:</label>
-        <input type="text" name="miasto" id="miasto" required>
-        <label for="kod_pocztowy">Kod pocztowy:</label>
-        <input type="text" name="kod_pocztowy" id="kod_pocztowy" required>
-        <label for="email">E-mail:</label>
-        <input type="email" name="email" id="email" required>
-        <label for="telefon">Numer telefonu:</label>
-        <input type="text" name="telefon" id="telefon" required>
-        <button type="submit">Złóż zamówienie</button>
-    </form>
-
     <h3 class="text-end">Całkowita kwota: <?php echo number_format($total, 2); ?> zł</h3>
 
     <a href="koszyk.php" class="btn btn-secondary mt-3">Powrót do koszyka</a>
+    <a href="zloz_zamowienie.php" class="btn btn-primary mt-3">Zakończ zakupy</a>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
