@@ -10,6 +10,14 @@ $id_klienta = isset($_SESSION['id']) ? $_SESSION['id'] : 1;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ilosc'])) {
     $ilosci = $_POST['ilosc'];
+    foreach ($ilosci as $id_koszyka => $ilosc) {
+        if ($ilosc > 0) {
+            $update_sql = "UPDATE koszyk SET ilosc = ? WHERE id = ? AND id_klient = ?";
+            $update_stmt = $conn->prepare($update_sql);
+            $update_stmt->bind_param("iii", $ilosc, $id_koszyka, $id_klienta);
+            $update_stmt->execute();
+        }
+    }
     $produkty = [];
     foreach ($ilosci as $id_koszyka => $ilosc) {
         if ($ilosc > 0) {
